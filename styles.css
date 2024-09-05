@@ -702,6 +702,8 @@ footer {
     pointer-events: none;
     transition: all 0.1s ease;
     z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .cursor-hover {

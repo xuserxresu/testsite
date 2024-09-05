@@ -61,10 +61,43 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.classList.add('custom-cursor');
     document.body.appendChild(cursor);
 
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
+    let cursorTimeout;
+
+    function hideCursor() {
+        cursor.style.opacity = '0';
+    }
+
+    function showCursor() {
+        cursor.style.opacity = '1';
+        clearTimeout(cursorTimeout);
+        cursorTimeout = setTimeout(hideCursor, 1000);
+    }
+
+    function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    }
+
+    if (isMobileDevice()) {
+        document.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            cursor.style.left = touch.clientX + 'px';
+            cursor.style.top = touch.clientY + 'px';
+            showCursor();
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            cursor.style.left = touch.clientX + 'px';
+            cursor.style.top = touch.clientY + 'px';
+            showCursor();
+        });
+    } else {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.opacity = '1';
+        });
+    }
 
     document.querySelectorAll('a, button, .experience-card, .blog-card').forEach(elem => {
         elem.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
