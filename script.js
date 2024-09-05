@@ -190,15 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Newsletter form submission
-    const newsletterForm = document.getElementById('newsletter-form');
-    newsletterForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Add your newsletter subscription logic here
-        alert('Thank you for subscribing! (Replace this with your actual subscription logic)');
-        newsletterForm.reset();
-    });
-
     // Add this to your CSS file for the custom cursor
     /*
     .custom-cursor {
